@@ -30,33 +30,28 @@ export default function Signup() {
     }
     setLoading(true)
 
-    const { data, error: signUpError } = await supabase.auth.signUp({ email, password })
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName.trim(),
+          role,
+          stage: role === 'تلميذ' ? stage : null,
+          year: role === 'تلميذ' ? year : null,
+          branch: role === 'تلميذ' && stage === 'ثانوي' && year !== 'السنة 1' ? branch : null,
+          subjects: role === 'أستاذ' ? subjectsText.split(',').map(s => s.trim()).filter(Boolean) : null
+        }
+      }
+    })
     if (signUpError) {
       setError('خطأ في إنشاء الحساب: ' + signUpError.message)
       setLoading(false)
       return
     }
 
-    const userId = data.user?.id
-    if (!userId) {
-      setError('تم إرسال رابط تأكيد إلى بريدك الإلكتروني. افتحه ثم سجّل الدخول.')
-      setLoading(false)
-      return
-    }
-
-    const profile = {
-      id: userId,
-      full_name: fullName.trim(),
-      role,
-      stage: role === 'تلميذ' ? stage : null,
-      year: role === 'تلميذ' ? year : null,
-      branch: role === 'تلميذ' && stage === 'ثانوي' && year !== 'السنة 1' ? branch : null,
-      subjects: role === 'أستاذ' ? subjectsText.split(',').map(s => s.trim()).filter(Boolean) : null
-    }
-
-    const { error: profileError } = await supabase.from('profiles').insert(profile)
-    if (profileError) {
-      setError('تم إنشاء الحساب لكن حدث خطأ في حفظ الملف الشخصي: ' + profileError.message)
+    if (!data.session) {
+      setError('تم إنشاء الحساب! إذا طُلب منك تأكيد البريد، افتح رسالة التأكيد ثم سجّل الدخول من صفحة /login')
       setLoading(false)
       return
     }
