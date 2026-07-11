@@ -42,6 +42,12 @@ export default function Dashboard() {
         <p style={{ marginTop: '1rem', color: '#A63D40', fontSize: '0.9rem' }}>
           ✅ هذا الحساب حقيقي، محفوظ في قاعدة البيانات وليس تجريبياً.
         </p>
+        {profile?.role === 'تلميذ' && (
+          <button onClick={() => router.push('/subjects')}
+            style={{ marginTop: '1.5rem', marginLeft: 8, padding: '0.6rem 1.2rem', background: '#1F4E3D', color: '#fff', border: 'none', borderRadius: 6 }}>
+            موادّي الدراسية
+          </button>
+        )}
         <button onClick={handleLogout}
           style={{ marginTop: '1.5rem', padding: '0.6rem 1.2rem', background: '#1D2B3A', color: '#fff', border: 'none', borderRadius: 6 }}>
           تسجيل الخروج
