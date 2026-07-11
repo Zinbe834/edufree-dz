@@ -48,6 +48,12 @@ export default function Dashboard() {
             موادّي الدراسية
           </button>
         )}
+        {profile?.role === 'أستاذ' && (
+          <button onClick={() => router.push('/teacher')}
+            style={{ marginTop: '1.5rem', marginLeft: 8, padding: '0.6rem 1.2rem', background: '#1F4E3D', color: '#fff', border: 'none', borderRadius: 6 }}>
+            موادّي
+          </button>
+        )}
         <button onClick={handleLogout}
           style={{ marginTop: '1.5rem', padding: '0.6rem 1.2rem', background: '#1D2B3A', color: '#fff', border: 'none', borderRadius: 6 }}>
           تسجيل الخروج
