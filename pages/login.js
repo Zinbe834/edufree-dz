@@ -37,6 +37,10 @@ export default function Login() {
 
         {error && <p style={{ color: '#A63D40', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</p>}
 
+        <p style={{ marginBottom: '1rem', fontSize: '0.85rem', textAlign: 'left' }}>
+          <a href="/forgot-password" style={{ color: '#1F4E3D' }}>نسيت كلمة المرور؟</a>
+        </p>
+
         <button type="submit" disabled={loading}
           style={{ width: '100%', padding: '0.8rem', background: '#1F4E3D', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 'bold' }}>
           {loading ? 'جارٍ الدخول...' : 'دخول'}
