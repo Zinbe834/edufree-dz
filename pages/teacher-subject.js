@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabaseClient'
+import styles from '../styles/app.module.css'
 
 export default function TeacherSubject() {
   const router = useRouter()
@@ -75,75 +76,58 @@ export default function TeacherSubject() {
     loadContent()
   }
 
-  if (loading) return <p style={{ padding: '2rem', fontFamily: 'Tahoma, sans-serif' }}>جارٍ التحميل...</p>
+  if (loading) return <div className={styles.page}><p>جارٍ التحميل...</p></div>
 
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#F3ECD9', fontFamily: 'Tahoma, sans-serif', padding: '2rem' }}>
-      <div style={{ maxWidth: 700, margin: '0 auto' }}>
-        <button onClick={() => router.push('/teacher')} style={{ background: 'none', border: 'none', color: '#6b6252', marginBottom: '1rem', cursor: 'pointer' }}>
-          ← كل موادّي
-        </button>
-        <h1 style={{ color: '#1D2B3A', marginBottom: '0.5rem' }}>{name}</h1>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <button className={styles.backLink} onClick={() => router.push('/teacher')}>← كل موادّي</button>
+        <h1 className={styles.sectionTitle}>{name}</h1>
 
-        <label style={{ fontWeight: 'bold', display: 'block', marginBottom: 4 }}>الطور المستهدف بهذا المحتوى</label>
-        <select value={stage} onChange={e => setStage(e.target.value)}
-          style={{ padding: '0.5rem', borderRadius: 6, border: '1px solid #d8cfb4', marginBottom: '1.5rem' }}>
+        <label className={styles.itemTitle} style={{ display: 'block', margin: '1rem 0 0.4rem' }}>الطور المستهدف بهذا المحتوى</label>
+        <select className={styles.selectInput} value={stage} onChange={e => setStage(e.target.value)}>
           <option value="ابتدائي">ابتدائي</option>
           <option value="متوسط">متوسط</option>
           <option value="ثانوي">ثانوي</option>
         </select>
 
-        <h3 style={{ color: '#C98A2B' }}>➕ إضافة درس</h3>
-        <div style={{ background: '#fff', border: '1px solid #e5dcc2', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
-          <input value={lessonForm.title} onChange={e => setLessonForm({ ...lessonForm, title: e.target.value })}
-            placeholder="عنوان الدرس" style={{ width: '100%', padding: '0.6rem', border: '1px solid #d8cfb4', borderRadius: 6, marginBottom: 8 }} />
-          <textarea value={lessonForm.content} onChange={e => setLessonForm({ ...lessonForm, content: e.target.value })}
-            placeholder="محتوى الدرس" rows={3} style={{ width: '100%', padding: '0.6rem', border: '1px solid #d8cfb4', borderRadius: 6, marginBottom: 8 }} />
-          <button onClick={addLesson} style={{ background: '#1F4E3D', color: '#fff', border: 'none', borderRadius: 6, padding: '0.6rem 1.2rem', cursor: 'pointer', fontWeight: 'bold' }}>
-            نشر الدرس
-          </button>
+        <h3 className={styles.subHeading}>➕ إضافة درس</h3>
+        <div className={styles.formCard}>
+          <input className={styles.textInput} value={lessonForm.title} onChange={e => setLessonForm({ ...lessonForm, title: e.target.value })} placeholder="عنوان الدرس" />
+          <textarea className={styles.textInput} value={lessonForm.content} onChange={e => setLessonForm({ ...lessonForm, content: e.target.value })} placeholder="محتوى الدرس" rows={3} />
+          <button className={styles.btnGreen} onClick={addLesson}>نشر الدرس</button>
           <div style={{ marginTop: '1rem' }}>
-            {lessons.map(l => <p key={l.id} style={{ fontSize: '0.9rem', color: '#1D2B3A' }}>• {l.title}</p>)}
+            {lessons.map(l => <p key={l.id} className={styles.itemDesc} style={{ margin: '0.2rem 0' }}>• {l.title}</p>)}
           </div>
         </div>
 
-        <h3 style={{ color: '#C98A2B' }}>📝 إنشاء اختبار</h3>
-        <div style={{ background: '#fff', border: '1px solid #e5dcc2', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
-          <input value={testTitle} onChange={e => setTestTitle(e.target.value)} placeholder="عنوان الاختبار"
-            style={{ width: '100%', padding: '0.6rem', border: '1px solid #d8cfb4', borderRadius: 6, marginBottom: 8 }} />
+        <h3 className={styles.subHeading}>📝 إنشاء اختبار</h3>
+        <div className={styles.formCard}>
+          <input className={styles.textInput} value={testTitle} onChange={e => setTestTitle(e.target.value)} placeholder="عنوان الاختبار" />
 
-          {questions.map((q, i) => <p key={i} style={{ fontSize: '0.85rem', color: '#6b6252' }}>✓ سؤال {i + 1}: {q.text}</p>)}
+          {questions.map((q, i) => <p key={i} className={styles.itemDesc} style={{ margin: '0.2rem 0' }}>✓ سؤال {i + 1}: {q.text}</p>)}
 
           <div style={{ borderTop: '1px solid #e5dcc2', paddingTop: 10, marginTop: 10 }}>
-            <input value={qDraft.text} onChange={e => setQDraft({ ...qDraft, text: e.target.value })}
-              placeholder="نص السؤال" style={{ width: '100%', padding: '0.6rem', border: '1px solid #d8cfb4', borderRadius: 6, marginBottom: 8 }} />
+            <input className={styles.textInput} value={qDraft.text} onChange={e => setQDraft({ ...qDraft, text: e.target.value })} placeholder="نص السؤال" />
             {qDraft.options.map((o, oi) => (
-              <div key={oi} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+              <div key={oi} className={styles.optionRow}>
                 <input type="radio" checked={qDraft.correct === oi} onChange={() => setQDraft({ ...qDraft, correct: oi })} />
-                <input value={o} onChange={e => {
+                <input className={styles.textInput} style={{ marginBottom: 0 }} value={o} onChange={e => {
                   const opts = [...qDraft.options]; opts[oi] = e.target.value
                   setQDraft({ ...qDraft, options: opts })
-                }} placeholder={`الخيار ${oi + 1}`} style={{ flex: 1, padding: '0.5rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+                }} placeholder={`الخيار ${oi + 1}`} />
               </div>
             ))}
-            <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
-              <button onClick={() => setQDraft({ ...qDraft, options: [...qDraft.options, ''] })}
-                style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: '1px solid #d8cfb4', borderRadius: 6, background: '#fff', cursor: 'pointer' }}>
-                + خيار
-              </button>
-              <button onClick={addQuestionToDraft}
-                style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: 'none', borderRadius: 6, background: '#C98A2B', color: '#fff', cursor: 'pointer' }}>
-                إضافة السؤال
-              </button>
+            <div className={styles.smallBtnRow}>
+              <button className={styles.btnGhost} onClick={() => setQDraft({ ...qDraft, options: [...qDraft.options, ''] })}>+ خيار</button>
+              <button className={styles.btnGold} onClick={addQuestionToDraft}>إضافة السؤال</button>
             </div>
           </div>
 
-          <button onClick={publishTest} style={{ marginTop: 12, background: '#A63D40', color: '#fff', border: 'none', borderRadius: 6, padding: '0.6rem 1.2rem', cursor: 'pointer', fontWeight: 'bold' }}>
-            نشر الاختبار
-          </button>
+          <button className={styles.btnSmallRed} style={{ marginTop: 12 }} onClick={publishTest}>نشر الاختبار</button>
 
           <div style={{ marginTop: '1rem' }}>
-            {tests.map(t => <p key={t.id} style={{ fontSize: '0.9rem', color: '#1D2B3A' }}>• {t.title}</p>)}
+            {tests.map(t => <p key={t.id} className={styles.itemDesc} style={{ margin: '0.2rem 0' }}>• {t.title}</p>)}
           </div>
         </div>
       </div>
