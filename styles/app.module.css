@@ -1,0 +1,274 @@
+.page {
+  min-height: 100vh;
+  background: #F3ECD9;
+  direction: rtl;
+  padding: 2rem 1.2rem 4rem;
+}
+
+.container { max-width: 760px; margin: 0 auto; }
+
+.backLink {
+  background: none;
+  border: none;
+  color: #6b6252;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.welcomeCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(29,43,58,0.06);
+}
+
+.title {
+  font-family: 'Reem Kufi', sans-serif;
+  color: #1D2B3A;
+  font-size: 1.6rem;
+  margin: 0 0 0.3rem;
+}
+
+.subtitle { color: #6b6252; font-size: 0.95rem; margin: 0 0 1.5rem; }
+
+.infoLine { color: #4A4235; margin: 0.2rem 0; font-size: 0.95rem; }
+
+.verifiedNote {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #A63D40;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  background: #F3DEDD;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+}
+
+.actionsRow { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+.btnGreen {
+  padding: 0.65rem 1.3rem;
+  background: #1F4E3D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+}
+
+.btnDark {
+  padding: 0.65rem 1.3rem;
+  background: #1D2B3A;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+}
+
+.sectionTitle {
+  font-family: 'Reem Kufi', sans-serif;
+  color: #1D2B3A;
+  font-size: 1.5rem;
+  margin: 0 0 0.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.subjectCard {
+  text-align: right;
+  padding: 1.1rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #e5dcc2;
+  background: #fff;
+  color: #1D2B3A;
+  font-weight: bold;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: box-shadow 0.15s;
+}
+.subjectCard:hover { box-shadow: 0 6px 16px rgba(29,43,58,0.1); }
+
+.emptyNote {
+  color: #8a8168;
+  background: #EFE6CE;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.subHeading {
+  color: #C98A2B;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 1.8rem 0 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.itemCard {
+  background: #fff;
+  border: 1px solid #e5dcc2;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.itemCardRow {
+  composes: itemCard;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemTitle { font-weight: bold; color: #1D2B3A; margin: 0; }
+.itemDesc { color: #6b6252; font-size: 0.9rem; margin-top: 0.3rem; }
+
+.btnSmallRed {
+  background: #A63D40;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  flex-shrink: 0;
+}
+
+.chatBox {
+  background: #fff;
+  border: 1px solid #e5dcc2;
+  border-radius: 10px;
+  padding: 1rem;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 0.6rem;
+}
+
+.chatLine { font-size: 0.9rem; margin-bottom: 0.4rem; }
+.chatAuthorTeacher { color: #A63D40; font-weight: bold; }
+.chatAuthorStudent { color: #1F4E3D; font-weight: bold; }
+.chatText { color: #4A4235; }
+
+.chatInputRow { display: flex; gap: 0.5rem; }
+
+.input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #d8cfb4;
+  border-radius: 8px;
+  font-family: 'Tajawal', sans-serif;
+  background: #fffdf7;
+}
+
+.sendBtn {
+  background: #1F4E3D;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0 1.1rem;
+  cursor: pointer;
+}
+
+.formCard {
+  background: #fff;
+  border: 1px solid #e5dcc2;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.textInput {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #d8cfb4;
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+  font-family: 'Tajawal', sans-serif;
+  background: #fffdf7;
+}
+
+.selectInput { composes: textInput; margin-bottom: 1.2rem; width: auto; }
+
+.optionRow { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+
+.smallBtnRow { display: flex; gap: 0.5rem; margin-top: 0.6rem; }
+
+.btnGhost {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #d8cfb4;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.btnGold {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: #C98A2B;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(29,43,58,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  z-index: 50;
+}
+
+.modalCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 480px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.optionBtn {
+  display: block;
+  width: 100%;
+  text-align: right;
+  padding: 0.55rem 0.9rem;
+  margin-bottom: 0.35rem;
+  border-radius: 8px;
+  border: 1px solid #d8cfb4;
+  cursor: pointer;
+  background: #fff;
+  color: #4A4235;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.optionBtnActive {
+  composes: optionBtn;
+  background: #1F4E3D;
+  border-color: #1F4E3D;
+  color: #fff;
+}
