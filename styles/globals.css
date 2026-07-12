@@ -1,9 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&family=Tajawal:wght@400;500;700;900&display=swap');
+
 html, body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Tajawal', Tahoma, sans-serif;
+  background: #F3ECD9;
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1, h2, h3, .heading {
+  font-family: 'Reem Kufi', sans-serif;
 }
