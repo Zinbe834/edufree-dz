@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabaseClient'
+import styles from '../styles/auth.module.css'
 
 export default function ForgotPassword() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
@@ -24,27 +27,28 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#F3ECD9', fontFamily: 'Tahoma, sans-serif', padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 8, padding: '2rem', maxWidth: 380, width: '100%' }}>
-        <h1 style={{ color: '#1D2B3A', marginBottom: '0.5rem' }}>نسيت كلمة المرور؟</h1>
-        <p style={{ color: '#6b6252', fontSize: '0.9rem', marginBottom: '1.5rem' }}>أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.</p>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <button className={styles.backLink} onClick={() => router.push('/login')}>← رجوع لتسجيل الدخول</button>
+        <h1 className={styles.title}>نسيت كلمة المرور؟</h1>
+        <p className={styles.subtitle}>أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.</p>
 
-        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>البريد الإلكتروني</label>
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
-          style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+        <form onSubmit={handleSubmit}>
+          <label className={styles.label}>البريد الإلكتروني</label>
+          <input className={styles.input} type="email" value={email} onChange={e => setEmail(e.target.value)} required />
 
-        {error && <p style={{ color: '#A63D40', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</p>}
-        {message && <p style={{ color: '#1F4E3D', marginBottom: '1rem', fontSize: '0.9rem' }}>{message}</p>}
+          {error && <p className={styles.error}>{error}</p>}
+          {message && <p className={styles.success}>{message}</p>}
 
-        <button type="submit" disabled={loading}
-          style={{ width: '100%', padding: '0.8rem', background: '#1F4E3D', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 'bold' }}>
-          {loading ? 'جارٍ الإرسال...' : 'إرسال رابط إعادة التعيين'}
-        </button>
+          <button type="submit" disabled={loading} className={styles.submitBtnGreen}>
+            {loading ? 'جارٍ الإرسال...' : 'إرسال رابط إعادة التعيين'}
+          </button>
+        </form>
 
-        <p style={{ marginTop: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>
-          <a href="/login" style={{ color: '#A63D40', fontWeight: 'bold' }}>الرجوع لتسجيل الدخول</a>
+        <p className={styles.footerText}>
+          <a className={styles.footerLinkRed} href="/login">الرجوع لتسجيل الدخول</a>
         </p>
-      </form>
+      </div>
     </div>
   )
 }
