@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabaseClient'
+import styles from '../styles/auth.module.css'
 
 const STAGES = {
   'ابتدائي': { years: ['السنة 1', 'السنة 2', 'السنة 3', 'السنة 4', 'السنة 5'] },
@@ -60,77 +61,77 @@ export default function Signup() {
   }
 
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#F3ECD9', fontFamily: 'Tahoma, sans-serif', padding: '2rem', display: 'flex', justifyContent: 'center' }}>
-      <form onSubmit={handleSubmit} style={{ background: '#fff', borderRadius: 8, padding: '2rem', maxWidth: 420, width: '100%', height: 'fit-content' }}>
-        <h1 style={{ color: '#1D2B3A', marginBottom: '1.5rem' }}>إنشاء حساب</h1>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <button className={styles.backLink} onClick={() => router.push('/')}>← رجوع</button>
 
-        <div style={{ display: 'flex', gap: 8, marginBottom: '1rem' }}>
-          {['تلميذ', 'أستاذ'].map(r => (
-            <button type="button" key={r} onClick={() => setRole(r)}
-              style={{
-                flex: 1, padding: '0.6rem', borderRadius: 6, border: '1px solid #1F4E3D',
-                background: role === r ? '#1F4E3D' : '#fff', color: role === r ? '#fff' : '#1F4E3D', fontWeight: 'bold'
-              }}>{r}</button>
-          ))}
+        <div className={styles.headerRow}>
+          <div className={styles.seal}>
+            <div className={styles.sealRing} />
+            <div className={styles.sealInner}>{role === 'تلميذ' ? 'تلميذ' : 'أستاذ'}</div>
+          </div>
+          <h1 className={styles.title}>إنشاء حساب {role}</h1>
         </div>
 
-        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>الاسم الكامل</label>
-        <input value={fullName} onChange={e => setFullName(e.target.value)}
-          style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+        <form onSubmit={handleSubmit}>
+          <div className={styles.roleRow}>
+            {['تلميذ', 'أستاذ'].map(r => (
+              <button type="button" key={r} onClick={() => setRole(r)}
+                className={role === r ? styles.roleBtnActive : styles.roleBtn}>{r}</button>
+            ))}
+          </div>
 
-        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>البريد الإلكتروني</label>
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)}
-          style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+          <label className={styles.label}>الاسم الكامل</label>
+          <input className={styles.input} value={fullName} onChange={e => setFullName(e.target.value)} />
 
-        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>كلمة المرور (6 أحرف على الأقل)</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-          style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+          <label className={styles.label}>البريد الإلكتروني</label>
+          <input className={styles.input} type="email" value={email} onChange={e => setEmail(e.target.value)} />
 
-        {role === 'تلميذ' && (
-          <>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>الطور</label>
-            <select value={stage} onChange={e => { setStage(e.target.value); setYear(STAGES[e.target.value].years[0]) }}
-              style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }}>
-              {Object.keys(STAGES).map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
+          <label className={styles.label}>كلمة المرور (6 أحرف على الأقل)</label>
+          <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} />
 
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>السنة</label>
-            <select value={year} onChange={e => setYear(e.target.value)}
-              style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }}>
-              {STAGES[stage].years.map(y => <option key={y} value={y}>{y}</option>)}
-            </select>
+          {role === 'تلميذ' && (
+            <>
+              <label className={styles.label}>الطور</label>
+              <select className={styles.input} value={stage} onChange={e => { setStage(e.target.value); setYear(STAGES[e.target.value].years[0]) }}>
+                {Object.keys(STAGES).map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
 
-            {stage === 'ثانوي' && year !== 'السنة 1' && (
-              <>
-                <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>الشعبة</label>
-                <select value={branch} onChange={e => setBranch(e.target.value)}
-                  style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }}>
-                  {STAGES['ثانوي'].branches.map(b => <option key={b} value={b}>{b}</option>)}
-                </select>
-              </>
-            )}
-          </>
-        )}
+              <label className={styles.label}>السنة</label>
+              <select className={styles.input} value={year} onChange={e => setYear(e.target.value)}>
+                {STAGES[stage].years.map(y => <option key={y} value={y}>{y}</option>)}
+              </select>
 
-        {role === 'أستاذ' && (
-          <>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>المواد التي تدرّسها (افصل بينها بفاصلة)</label>
-            <input value={subjectsText} onChange={e => setSubjectsText(e.target.value)} placeholder="مثال: الرياضيات, الفيزياء"
-              style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
-          </>
-        )}
+              {stage === 'ثانوي' && year !== 'السنة 1' && (
+                <>
+                  <label className={styles.label}>الشعبة</label>
+                  <select className={styles.input} value={branch} onChange={e => setBranch(e.target.value)}>
+                    {STAGES['ثانوي'].branches.map(b => <option key={b} value={b}>{b}</option>)}
+                  </select>
+                </>
+              )}
+            </>
+          )}
 
-        {error && <p style={{ color: '#A63D40', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</p>}
+          {role === 'أستاذ' && (
+            <>
+              <label className={styles.label}>المواد التي تدرّسها (افصل بينها بفاصلة)</label>
+              <input className={styles.input} value={subjectsText} onChange={e => setSubjectsText(e.target.value)} placeholder="مثال: الرياضيات, الفيزياء" />
+              <p className={styles.note}>🛡️ يُفعَّل حساب الأستاذ رسمياً بعد التحقق من الإدارة</p>
+            </>
+          )}
 
-        <button type="submit" disabled={loading}
-          style={{ width: '100%', padding: '0.8rem', background: '#A63D40', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 'bold' }}>
-          {loading ? 'جارٍ الإنشاء...' : 'إنشاء الحساب'}
-        </button>
+          {error && <p className={styles.error}>{error}</p>}
 
-        <p style={{ marginTop: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>
-          لديك حساب؟ <a href="/login" style={{ color: '#1F4E3D', fontWeight: 'bold' }}>سجّل الدخول</a>
+          <button type="submit" disabled={loading} className={styles.submitBtn}>
+            {loading ? 'جارٍ الإنشاء...' : 'إنشاء الحساب'}
+          </button>
+        </form>
+
+        <p className={styles.footerText}>
+          لديك حساب؟ <a className={styles.footerLink} href="/login">سجّل الدخول</a>
         </p>
-      </form>
+      </div>
     </div>
   )
 }
