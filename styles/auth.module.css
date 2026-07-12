@@ -1,0 +1,198 @@
+.page {
+  min-height: 100vh;
+  background: #F3ECD9;
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.2rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.2rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(29,43,58,0.08);
+}
+
+.backLink {
+  background: none;
+  border: none;
+  color: #6b6252;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.seal {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sealRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed #A63D40;
+}
+
+.sealInner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #A63D40;
+  color: #F3ECD9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.1;
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+.title {
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: 1.3rem;
+  color: #1D2B3A;
+  margin: 0;
+}
+
+.subtitle {
+  color: #6b6252;
+  font-size: 0.9rem;
+  margin: -1rem 0 1.5rem;
+}
+
+.roleRow {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.roleBtn {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1.5px solid #1F4E3D;
+  background: #fff;
+  color: #1F4E3D;
+  font-weight: bold;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.roleBtnActive {
+  composes: roleBtn;
+  background: #1F4E3D;
+  color: #fff;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  color: #1D2B3A;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.input, select.input, textarea.input {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #d8cfb4;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  background: #fffdf7;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #d8cfb4;
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.chip {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #d8cfb4;
+  background: #fff;
+  color: #4A4235;
+  cursor: pointer;
+}
+
+.chipActive {
+  composes: chip;
+  background: #1F4E3D;
+  border-color: #1F4E3D;
+  color: #fff;
+}
+
+.note {
+  font-size: 0.78rem;
+  color: #A63D40;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.error { color: #A63D40; font-size: 0.9rem; margin-bottom: 1rem; }
+.success { color: #1F4E3D; font-size: 0.9rem; margin-bottom: 1rem; }
+
+.submitBtn {
+  width: 100%;
+  padding: 0.85rem;
+  background: #A63D40;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.submitBtnGreen {
+  composes: submitBtn;
+  background: #1F4E3D;
+}
+
+.footerText {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #4A4235;
+}
+
+.footerLink { color: #1F4E3D; font-weight: bold; text-decoration: none; }
+.footerLinkRed { color: #A63D40; font-weight: bold; text-decoration: none; }
+
+.forgotLink { text-align: left; margin-bottom: 1rem; }
+.forgotLink a { color: #1F4E3D; font-size: 0.85rem; text-decoration: none; }
