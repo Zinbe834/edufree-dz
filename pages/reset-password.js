@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabaseClient'
+import styles from '../styles/auth.module.css'
 
 export default function ResetPassword() {
   const router = useRouter()
@@ -35,34 +36,31 @@ export default function ResetPassword() {
   }
 
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#F3ECD9', fontFamily: 'Tahoma, sans-serif', padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ background: '#fff', borderRadius: 8, padding: '2rem', maxWidth: 380, width: '100%' }}>
-        <h1 style={{ color: '#1D2B3A', marginBottom: '1.5rem' }}>كلمة مرور جديدة</h1>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <h1 className={styles.title} style={{ marginBottom: '1.5rem' }}>كلمة مرور جديدة</h1>
 
         {!ready && !message && (
-          <p style={{ color: '#6b6252', fontSize: '0.9rem' }}>جارٍ التحقق من الرابط... إذا لم يعمل، اطلب رابطاً جديداً من صفحة نسيت كلمة المرور.</p>
+          <p className={styles.subtitle} style={{ margin: 0 }}>جارٍ التحقق من الرابط... إذا لم يعمل، اطلب رابطاً جديداً من صفحة نسيت كلمة المرور.</p>
         )}
 
         {ready && !message && (
           <form onSubmit={handleSubmit}>
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>كلمة المرور الجديدة</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-              style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+            <label className={styles.label}>كلمة المرور الجديدة</label>
+            <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} />
 
-            <label style={{ display: 'block', fontWeight: 'bold', marginBottom: 4 }}>تأكيد كلمة المرور</label>
-            <input type="password" value={confirm} onChange={e => setConfirm(e.target.value)}
-              style={{ width: '100%', padding: '0.6rem', marginBottom: '1rem', border: '1px solid #d8cfb4', borderRadius: 6 }} />
+            <label className={styles.label}>تأكيد كلمة المرور</label>
+            <input className={styles.input} type="password" value={confirm} onChange={e => setConfirm(e.target.value)} />
 
-            {error && <p style={{ color: '#A63D40', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</p>}
+            {error && <p className={styles.error}>{error}</p>}
 
-            <button type="submit" disabled={loading}
-              style={{ width: '100%', padding: '0.8rem', background: '#A63D40', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 'bold' }}>
+            <button type="submit" disabled={loading} className={styles.submitBtn}>
               {loading ? 'جارٍ الحفظ...' : 'تغيير كلمة المرور'}
             </button>
           </form>
         )}
 
-        {message && <p style={{ color: '#1F4E3D' }}>{message}</p>}
+        {message && <p className={styles.success}>{message}</p>}
       </div>
     </div>
   )
