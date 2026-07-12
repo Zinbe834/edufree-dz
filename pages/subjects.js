@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabaseClient'
+import styles from '../styles/app.module.css'
 
 const CURRICULUM = {
   'ابتدائي': {
@@ -44,30 +45,22 @@ export default function Subjects() {
     load()
   }, [])
 
-  if (loading) return <p style={{ padding: '2rem', fontFamily: 'Tahoma, sans-serif' }}>جارٍ التحميل...</p>
+  if (loading) return <div className={styles.page}><p>جارٍ التحميل...</p></div>
 
   const subjectList = profile.stage === 'ثانوي'
     ? [...CURRICULUM['ثانوي'].common, ...(profile.branch ? CURRICULUM['ثانوي'].branchSubjects[profile.branch] : [])]
     : CURRICULUM[profile.stage].subjects
 
   return (
-    <div dir="rtl" style={{ minHeight: '100vh', background: '#F3ECD9', fontFamily: 'Tahoma, sans-serif', padding: '2rem' }}>
-      <div style={{ maxWidth: 700, margin: '0 auto' }}>
-        <button onClick={() => router.push('/dashboard')} style={{ background: 'none', border: 'none', color: '#6b6252', marginBottom: '1rem', cursor: 'pointer' }}>
-          ← الرجوع للوحة التحكم
-        </button>
-        <h1 style={{ color: '#1D2B3A', marginBottom: '0.3rem' }}>
-          {profile.stage} — {profile.year} {profile.branch ? `— ${profile.branch}` : ''}
-        </h1>
-        <p style={{ color: '#6b6252', marginBottom: '1.5rem' }}>اختر مادة لعرض الدروس والاختبارات</p>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <button className={styles.backLink} onClick={() => router.push('/dashboard')}>← الرجوع للوحة التحكم</button>
+        <h1 className={styles.sectionTitle}>{profile.stage} — {profile.year} {profile.branch ? `— ${profile.branch}` : ''}</h1>
+        <p className={styles.subtitle}>اختر مادة لعرض الدروس والاختبارات</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
+        <div className={styles.grid}>
           {subjectList.map(s => (
-            <button key={s} onClick={() => router.push(`/subject?name=${encodeURIComponent(s)}`)}
-              style={{
-                textAlign: 'right', padding: '1rem', borderRadius: 8, border: '1px solid #e5dcc2',
-                background: '#fff', color: '#1D2B3A', fontWeight: 'bold', cursor: 'pointer', fontSize: '1rem'
-              }}>
+            <button key={s} className={styles.subjectCard} onClick={() => router.push(`/subject?name=${encodeURIComponent(s)}`)}>
               {s}
             </button>
           ))}
